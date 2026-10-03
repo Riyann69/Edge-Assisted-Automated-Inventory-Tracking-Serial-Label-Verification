@@ -28,7 +28,7 @@ Evaluated on 496 synthetic camera frames with exact ground truth (per-image resu
 | YOLO11n label detection, held-out frames | 100 % found at IoU ≥ 0.5, mean IoU 0.96 (val mAP50 0.995) |
 | Same layer in front of EasyOCR instead of Tesseract | CER 0.528 → 0.019 |
 | Decision rules (unit cases) | 10 / 10 |
-| End-to-end time per item | median 1.06 s on an Intel Core Ultra 7 laptop CPU, plugged in (about 3× slower on battery) |
+| End-to-end time per item | median 1.1–1.4 s across runs on an Intel Core Ultra 7 laptop CPU, plugged in (about 3× slower on battery) |
 
 ## How it works
 
