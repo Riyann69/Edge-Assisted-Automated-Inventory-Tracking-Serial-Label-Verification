@@ -1,0 +1,61 @@
+serial,item,qty,location,status
+CTL-Y45515-D,Motor Controller,264,Rack-E06,OK
+LBL-8609-XW,Return Label Stock,317,Rack-E12,OK
+BOX-501204-VH,Shipping Carton,329,Rack-C04,OK
+CMP-006459-Z,Capacitor Bank Unit,132,Rack-E11,OK
+MTR-0511-N8,BLDC Motor 24V,454,Rack-A11,OK
+SN-9493-U,Voltage Regulator Module,143,Rack-C07,FAULTY
+CMP-039712-A,Capacitor Bank Unit,24,Rack-A04,FAULTY
+CTL-54171-EP,Motor Controller,42,Rack-A11,OK
+CMP-9838-G,Capacitor Bank Unit,125,Rack-C08,OK
+DRV-014068-CD,Stepper Driver Board,112,Rack-C06,OK
+DRV-634945-GF,Stepper Driver Board,73,Rack-A02,OK
+CMP-179198-P,Capacitor Bank Unit,425,Rack-E04,OK
+PCB-9272-KG,Main Controller PCB,387,Rack-C07,OK
+PCB-5862-0,Main Controller PCB,193,Rack-B11,OK
+PCB-20259-N,Main Controller PCB,310,Rack-C05,OK
+CTL-65100-Z8,Motor Controller,387,Rack-B07,OK
+SN-473905-6,Voltage Regulator Module,302,Rack-A08,OK
+BOX-69847-UW,Shipping Carton,45,Rack-E02,OK
+PSU-60698-N0,Power Supply 12V 5A,295,Rack-D11,OK
+DRV-80706-A8,Stepper Driver Board,426,Rack-A02,OK
+PCB-V9203-S,Main Controller PCB,471,Rack-E02,OK
+MTR-P83614-5,BLDC Motor 24V,258,Rack-C05,OK
+PSU-3148-Z,Power Supply 12V 5A,117,Rack-C11,OK
+LBL-4983-YZ,Return Label Stock,192,Rack-A06,OK
+DRV-82662-L2,Stepper Driver Board,296,Rack-E11,OK
+SN-408210-Q,Voltage Regulator Module,229,Rack-E05,OK
+SEN-301827-TB,Temperature Sensor Pack,118,Rack-D12,OK
+CMP-R6567-4Z,Capacitor Bank Unit,132,Rack-A06,OK
+CMP-8341-N,Capacitor Bank Unit,17,Rack-C11,OK
+DRV-Z83390-H,Stepper Driver Board,203,Rack-B12,OK
+PSU-R992-M,Power Supply 12V 5A,413,Rack-D09,OK
+PCB-5740-P,Main Controller PCB,307,Rack-E03,OK
+SN-6949-8R,Voltage Regulator Module,393,Rack-D05,OK
+PCB-5851-LN,Main Controller PCB,118,Rack-E01,OK
+DRV-1524-TS,Stepper Driver Board,295,Rack-C01,OK
+DRV-95485-DG,Stepper Driver Board,416,Rack-D02,OK
+SEN-99241-67,Temperature Sensor Pack,161,Rack-E02,OK
+CTL-169170-F,Motor Controller,145,Rack-A06,OK
+SN-724458-ZZ,Voltage Regulator Module,329,Rack-B02,FAULTY
+PSU-4512-T,Power Supply 12V 5A,337,Rack-D04,OK
+SEN-196316-H,Temperature Sensor Pack,255,Rack-E06,OK
+CMP-2720-TZ,Capacitor Bank Unit,206,Rack-C06,OK
+CMP-70538-ES,Capacitor Bank Unit,175,Rack-B08,OK
+MTR-G84076-FG,BLDC Motor 24V,417,Rack-A12,OK
+CMP-J900-CD,Capacitor Bank Unit,28,Rack-D11,OK
+PSU-32360-G,Power Supply 12V 5A,6,Rack-D02,OK
+CTL-M9607-62,Motor Controller,495,Rack-E11,OK
+PSU-598297-3,Power Supply 12V 5A,190,Rack-A02,FAULTY
+PSU-R677-HG,Power Supply 12V 5A,220,Rack-B04,OK
+MTR-03662-MX,BLDC Motor 24V,330,Rack-D11,OK
+DRV-3967-9A,Stepper Driver Board,109,Rack-D07,OK
+DRV-I457-AJ,Stepper Driver Board,145,Rack-A08,OK
+LBL-59596-T,Return Label Stock,63,Rack-C11,OK
+SN-F3985-P,Voltage Regulator Module,475,Rack-B01,OK
+CTL-33542-X0,Motor Controller,13,Rack-E08,OK
+SN-S017-BL,Voltage Regulator Module,23,Rack-C02,OK
+PSU-7372-J1,Power Supply 12V 5A,188,Rack-B10,OK
+SN-891927-W,Voltage Regulator Module,372,Rack-D10,OK
+CTL-0514-QJ,Motor Controller,231,Rack-B05,OK
+DRV-759972-S,Stepper Driver Board,471,Rack-C11,OK
