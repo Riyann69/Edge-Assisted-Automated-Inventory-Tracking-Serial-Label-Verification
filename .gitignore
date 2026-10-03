@@ -1,3 +1,22 @@
+# ---- Project-specific: regenerable data, runtime state, third-party weights ----
+# The synthetic test set and YOLO training set are rebuilt by the seeded generator in the notebook.
+data/synthetic/
+data/yolo/
+# Runtime SQLite database (inventory + scan log) is rebuilt from data/inventory.csv.
+data/inventory.db
+# Your own photos stay local unless you choose to publish them.
+data/real/images/*
+data/real/incoming/*
+!data/real/images/.gitkeep
+!data/real/incoming/.gitkeep
+# Per-run stage dumps and YOLO training previews (the notebook regenerates them).
+outputs/stages/
+outputs/yolo/**/*.jpg
+outputs/yolo/**/*_curve.png
+outputs/yolo/**/confusion_matrix*.png
+# Model weights: Ultralytics YOLO is AGPL-3.0, so weights are not redistributed here.
+*.pt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
