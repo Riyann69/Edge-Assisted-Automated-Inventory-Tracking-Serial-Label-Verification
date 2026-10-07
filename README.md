@@ -71,9 +71,10 @@ pip install ultralytics --no-deps   # --no-deps keeps your existing OpenCV build
 jupyter notebook label_verification_pipeline.ipynb   # then Run All
 ```
 
-On a fresh clone, the first run regenerates the seeded synthetic datasets (about 1 minute) and trains the YOLO detector
-(about 25 minutes on a laptop CPU). Later runs reuse everything they cached. The `RUN_*` / `TRAIN_YOLO` flags at the top
-of the notebook skip the slow steps.
+The generated datasets and the trained YOLO weights are committed, so a fresh clone runs straight away from the cached
+data and results. To rebuild from scratch, set `REGENERATE_DATASET = True` (about 1 minute) and delete
+`outputs/yolo/label_detector/weights/` to retrain the detector (about 25 minutes on a laptop CPU). The `RUN_*` /
+`TRAIN_YOLO` flags at the top of the notebook skip the slow steps.
 
 ## Use your own photos or camera
 
@@ -104,8 +105,9 @@ D9 (each through 220 Ω), active buzzer on D10, 9600 baud. A MicroPython version
 └── hardware/                           # Arduino and Pico firmware
 ```
 
-Generated data (`data/synthetic/`, `data/yolo/`), model weights and the runtime database are rebuilt by the notebook
-and are not committed.
+Also committed, so results can be checked without re-running: the synthetic test set (`data/synthetic/`), the YOLO
+training set (`data/yolo/`), the YOLO weights (`yolo11n.pt`, `outputs/yolo/label_detector/weights/`), per-stage images
+(`outputs/stages/`) and the runtime database (`data/inventory.db`). The notebook can rebuild all of them from fixed seeds.
 
 ## Limitations
 
@@ -124,7 +126,7 @@ Capstone project, VIT-AP University: Vishal Koushik, Gowthami Ambati, Ruth Carol
 ## Licence
 
 Code in this repository is MIT licensed (see [LICENSE](LICENSE)). The YOLO detector uses
-[Ultralytics](https://github.com/ultralytics/ultralytics), which is licensed under **AGPL-3.0**. Its pretrained weights
-and the detector trained from them are therefore not redistributed here; the notebook downloads and trains them
-locally. Distributing a build that includes the Ultralytics detector is subject to AGPL-3.0 terms. The classical
-locator fallback has no such dependency.
+[Ultralytics](https://github.com/ultralytics/ultralytics), which is licensed under **AGPL-3.0**. The pretrained
+weights (`yolo11n.pt`) and the detector trained from them (`outputs/yolo/label_detector/weights/`) are included in this
+repository and are covered by **AGPL-3.0, not by the MIT licence**. Distributing a build that includes the Ultralytics
+detector is subject to AGPL-3.0 terms. The classical locator fallback has no such dependency.
