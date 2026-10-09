@@ -120,7 +120,7 @@ training set (`data/yolo/`), the YOLO weights (`yolo11n.pt`, `outputs/yolo/label
 
 ## Team
 
-Capstone project, VIT-AP University: Vishal Koushik, Gowthami Ambati, Ruth Caroline and Riyan Wankhede.
+Capstone project, VIT University: Vishal Koushik, Gowthami Ambati, Ruth Caroline and Riyan Wankhede.
 <!-- Add each member's role here, e.g. "Riyan Wankhede: geometric pre-processing layer and evaluation". -->
 
 ## Licence
