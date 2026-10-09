@@ -12,44 +12,54 @@ All three methods use the same OCR engine, character set and serial extraction, 
 
 ---
 
+
+
 ## Results
 
-Evaluated on 496 synthetic camera frames with exact ground truth (per-image results in [`outputs/results/`](outputs/results)).
+Evaluated on 496 synthetic camera frames with exact ground truth (per-image results in `[outputs/results/](outputs/results)`).
 
-| Method | Character error rate ↓ | Serial read exactly | Correct PASS / MISMATCH / ERROR |
-| --- | --- | --- | --- |
-| Raw frame → Tesseract (baseline) | 0.908 | 3 % | 5 % |
-| Rotate frame level → Tesseract (first prototype) | 0.352 | 43 % | 59 % |
-| **YOLO → geometric layer → Tesseract (this repo)** | **0.070** | **71 %** | **92 %** |
 
-| Other checks | Result |
-| --- | --- |
-| False PASS (unknown or faulty part given a green light) | **0 of 141** |
-| YOLO11n label detection, held-out frames | 100 % found at IoU ≥ 0.5, mean IoU 0.96 (val mAP50 0.995) |
-| Same layer in front of EasyOCR instead of Tesseract | CER 0.528 → 0.019 |
-| Decision rules (unit cases) | 10 / 10 |
-| End-to-end time per item | median 1.1–1.4 s across runs on an Intel Core Ultra 7 laptop CPU, plugged in (about 3× slower on battery) |
+| Method                                             | Character error rate ↓ | Serial read exactly | Correct PASS / MISMATCH / ERROR |
+| -------------------------------------------------- | ---------------------- | ------------------- | ------------------------------- |
+| Raw frame → Tesseract (baseline)                   | 0.908                  | 3 %                 | 5 %                             |
+| Rotate frame level → Tesseract (first prototype)   | 0.352                  | 43 %                | 59 %                            |
+| **YOLO → geometric layer → Tesseract (this repo)** | **0.070**              | **71 %**            | **92 %**                        |
+
+
+
+| Other checks                                            | Result                                                                                                    |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| False PASS (unknown or faulty part given a green light) | **0 of 141**                                                                                              |
+| YOLO11n label detection, held-out frames                | 100 % found at IoU ≥ 0.5, mean IoU 0.96 (val mAP50 0.995)                                                 |
+| Same layer in front of EasyOCR instead of Tesseract     | CER 0.528 → 0.019                                                                                         |
+| Decision rules (unit cases)                             | 10 / 10                                                                                                   |
+| End-to-end time per item                                | median 1.1–1.4 s across runs on an Intel Core Ultra 7 laptop CPU, plugged in (about 3× slower on battery) |
+
+
+
 
 ## How it works
 
 ![Pipeline stages on a bent PCB label](outputs/figures/stages_curvature_pcb.png)
 
 1. **Detect:** YOLO11n finds the label and crops a region of interest with a 12 % margin.
-   The classical locator is the fallback.
+  The classical locator is the fallback.
 2. **Segment:** a CIE-Lab colour model of the mat (taken from the ROI border, with shadows down-weighted) separates
-   label from background.
+  label from background.
 3. **Rectify:** a 4-corner fit (or a min-area box, whichever overlaps the mask better) and a homography remove
-   rotation and camera tilt in one step.
+  rotation and camera tilt in one step.
 4. **Dewarp:** the label's top and bottom edges are fitted with robust polynomials, and columns are re-sampled to
-   straighten bends (skipped when the fit is poor).
+  straighten bends (skipped when the fit is poor).
 5. **Normalise:** CLAHE for uneven light; text polarity is detected and inverted for white-on-green PCB silkscreen.
 6. **Deskew:** a projection-profile (Radon) search removes the last few degrees.
 7. **Attention crops:** text lines are isolated, and borders, QR codes and specks are masked out. Each line's
-   baseline is flattened.
+  baseline is flattened.
 8. **Read:** Tesseract reads line by line, with a confidence-guided retry at 3 scales and a 0°/180° orientation check.
 9. **Verify:** the serial is normalised, format-checked and fuzzy-matched against SQLite (≤ 2 edits, unambiguous).
-   An optional QR code is cross-checked. The decision is **PASS / MISMATCH / ERROR**.
+  An optional QR code is cross-checked. The decision is **PASS / MISMATCH / ERROR**.
 10. **Signal:** one byte over USB serial (`G` / `R` / `E`) drives a green LED, red LED or buzzer on an Arduino or Pico.
+
+
 
 ## What each stage contributes (ablation)
 
@@ -78,18 +88,22 @@ data and results. To rebuild from scratch, set `REGENERATE_DATASET = True` (abou
 
 ## Use your own photos or camera
 
-| Input | How |
-| --- | --- |
+
+| Input                  | How                                                                                                                                                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Folder of phone photos | Put them in `data/real/images/` and add `images/IMG_2041.jpg,SN-284517-XJ,30` (file, true serial, optional angle) to `data/real/annotations.csv`. Section 11 then reports the same metrics on real data |
-| Phone as a webcam | IP Webcam or DroidCam app, then `SOURCE = "http://<phone-ip>:8080/video"` |
-| Phone browser upload | `START_PHONE_SERVER = True`, open `http://<laptop-ip>:5000` on the phone (same Wi-Fi) |
-| USB webcam station | `SOURCE = 0`, then `live_scan(0)`: scans automatically when an item is placed and stops moving |
+| Phone as a webcam      | IP Webcam or DroidCam app, then `SOURCE = "http://<phone-ip>:8080/video"`                                                                                                                               |
+| Phone browser upload   | `START_PHONE_SERVER = True`, open `http://<laptop-ip>:5000` on the phone (same Wi-Fi)                                                                                                                   |
+| USB webcam station     | `SOURCE = 0`, then `live_scan(0)`: scans automatically when an item is placed and stops moving                                                                                                          |
+
+
+
 
 ## Hardware
 
-Arduino sketch in [`hardware/indicator/indicator.ino`](hardware/indicator/indicator.ino): green LED on D8, red LED on
+Arduino sketch in `[hardware/indicator/indicator.ino](hardware/indicator/indicator.ino)`: green LED on D8, red LED on
 D9 (each through 220 Ω), active buzzer on D10, 9600 baud. A MicroPython version for the Raspberry Pi Pico is in
-[`hardware/pico_main.py`](hardware/pico_main.py). Without a board connected, the notebook simulates the indicator.
+`[hardware/pico_main.py](hardware/pico_main.py)`. Without a board connected, the notebook simulates the indicator.
 
 ## Repository layout
 
@@ -112,16 +126,24 @@ training set (`data/yolo/`), the YOLO weights (`yolo11n.pt`, `outputs/yolo/label
 ## Limitations
 
 - **Synthetic evaluation so far.** Real-photo results are the next milestone; the real-data path above runs the
-  identical evaluation.
+identical evaluation.
 - **Shipping labels in the OCR-A font** read exactly only 20 % of the time. 90 of the pipeline's 92 most common character
-  confusions (6→B, 0→O, 8→A) come from that font, so this is an OCR problem, not a geometry one.
+confusions (6→B, 0→O, 8→A) come from that font, so this is an OCR problem, not a geometry one.
 - **Heavy crumpling** (creases through characters) drops exact reads to 47 %.
 - Assumes a fixed overhead camera, a mat that contrasts with the object, and one label per frame.
 
+
+
 ## Team
 
-Capstone project, VIT University: Vishal Koushik, Gowthami Ambati, Ruth Caroline and Riyan Wankhede.
-<!-- Add each member's role here, e.g. "Riyan Wankhede: geometric pre-processing layer and evaluation". -->
+Capstone project, VIT University.
+
+- **Riyan Wankhede:** vision pipeline (YOLO detection, geometric correction, OCR), inventory verification and evaluation
+- **Vishal Koushik:** Arduino indicator hardware
+- **Gowthami Ambati:** presentation slides
+- **Ruth Caroline:** project report 
+
+
 
 ## Licence
 
